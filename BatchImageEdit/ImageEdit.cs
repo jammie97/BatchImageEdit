@@ -35,8 +35,11 @@ namespace BatchImageEdit
             {
                 try
                 {
+                    Console.WriteLine("Reading Front Images...");
                     m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
                         SearchOption.AllDirectories).Select(Image.FromFile).ToList();
+
+                    Console.WriteLine("Reading Back Images...");
                     m_PECSBacks = Directory.GetFiles("Images", "*.0_2",
                         SearchOption.AllDirectories).Select(Image.FromFile).ToList();
                 }
@@ -67,6 +70,7 @@ namespace BatchImageEdit
                 }
 
                 m_PECSFronts[i].Save(String.Format("Output/E{0}NE05_F.jpg", (i + 1).ToString().PadLeft(6, '0')), ImageFormat.Jpeg);
+                m_PECSFronts[i] = null;
             }
 
             // Edit backs
@@ -86,7 +90,7 @@ namespace BatchImageEdit
                 }
 
                 m_PECSBacks[i].Save(String.Format("Output/E{0}NE05_B.jpg", (i + 1).ToString().PadLeft(6, '0')), ImageFormat.Jpeg);
-
+                m_PECSBacks[i] = null;
             }
 
 
