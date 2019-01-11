@@ -52,9 +52,11 @@ namespace BatchImageEdit
         {
             // Edit fronts
             // Edit fronts
+
             for (int i = 0; i < m_PECSFronts.Count; i++)
             {
-                Pen blackPen = new Pen(Color.Black, 3);
+                Console.Clear();
+                Console.WriteLine("#1 - Editing Front PECs: {0}/ {1}", i, m_PECSFronts.Count);
 
                 //Rectangle 
                 Rectangle Address = new Rectangle(242, 30, 638, 270);
@@ -70,8 +72,8 @@ namespace BatchImageEdit
             // Edit backs
             for (int i = 0; i < m_PECSBacks.Count; i++)
             {
-                Pen blackPen = new Pen(Color.Black, 3);
-            
+                Console.Clear();
+                Console.WriteLine("#2 - Editing Back PECs: {0}/ {1}", i, m_PECSBacks.Count);           
 
                 Rectangle Address = new Rectangle(68, 820, 810, 540);
 
@@ -86,6 +88,9 @@ namespace BatchImageEdit
                 m_PECSBacks[i].Save(String.Format("Output/E{0}NE05_B.jpg", (i + 1).ToString().PadLeft(6, '0')), ImageFormat.Jpeg);
 
             }
+
+
+            Console.Clear();
         }
 
     }
