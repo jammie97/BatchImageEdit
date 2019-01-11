@@ -12,16 +12,41 @@ namespace BatchImageEdit
         {
             Console.WriteLine("Batch Image Edit");
 
-            ImageEdit editor = new ImageEdit(true);
-            Console.WriteLine("Image Editor Constructed");
+            ImageEdit editor = new ImageEdit();
 
-            Console.WriteLine("Editing and saving image");
-            editor.EditAndSaveImages();
+            int index = 0;
+            while(index != -1)
+            {
+                Console.WriteLine("What would you like to edit:");
+                Console.WriteLine("1: Front Images");
+                Console.WriteLine("2: Back Images");
+                Console.WriteLine("0: Exit");
 
+                string Decision = Console.ReadLine();
 
-            Console.WriteLine("Done! Press any line to continue.");
+                if(!Int32.TryParse(Decision, out index))
+                {
+                    index = 10;
+                }
 
-            Console.ReadKey();
+                switch (index)
+                {
+                    case 1:
+                        editor.EditFrontImages();
+                        Console.WriteLine("Done front images!");
+                        break;
+                    case 2:
+                        editor.EditBackImages();
+                        Console.WriteLine("Done back images!");
+                        break;
+                    case 0:
+                        index = -1;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Option!");
+                        break;
+                }
+            }
         }
     }
 }
