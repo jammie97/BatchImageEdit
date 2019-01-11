@@ -65,7 +65,7 @@ namespace BatchImageEdit
                     graphics.FillRectangle(Brushes.Purple, Address);
                 }
 
-                m_PECSFronts[i].Save(String.Format("Output/E{0}NE05.jpg", i + 1), ImageFormat.Jpeg);
+                m_PECSFronts[i].Save(String.Format("Output/E{0}NE05_F.jpg", (i + 1).ToString().PadLeft(6, '0')), ImageFormat.Jpeg);
             }
 
             // Edit backs
@@ -84,7 +84,7 @@ namespace BatchImageEdit
                     graphics.FillRectangle(Brushes.Purple, Address);
                 }
 
-                m_PECSBacks[i].Save(String.Format("Output/E{0}NE05.jpg", (i + 1).ToString().PadLeft(6, '0')), ImageFormat.Jpeg);
+                m_PECSBacks[i].Save(String.Format("Output/E{0}NE05_B.jpg", (i + 1).ToString().PadLeft(6, '0')), ImageFormat.Jpeg);
 
             }
         }
