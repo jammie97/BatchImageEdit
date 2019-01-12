@@ -49,7 +49,7 @@ namespace BatchImageEdit
             {
 
                 //Rectangle 
-                Rectangle Address = new Rectangle(242, 30, 638, 270);
+                Rectangle Address = new Rectangle(68, 820, 810, 540);
                 
                 Image temp = Image.FromFile("Images\\" + m_PECSFronts[i]);
 
