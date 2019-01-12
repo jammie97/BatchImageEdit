@@ -11,44 +11,19 @@ namespace BatchImageEdit
 
     public class ImageEdit
     {
-        public List<Image> m_PECSFronts;
-        public List<Image> m_PECSBacks;
+        public string[] m_PECSFronts;
+        public string[] m_PECSBacks;
         public ImageEdit()
         {
-            m_PECSFronts = new List<Image>();
-            m_PECSBacks = new List<Image>();
 
-            //if (!multi)
-            //{
-            //    try
-            //    {
-                    
-            //        m_PECSBacks.Add(Image.FromFile("Images/Prescription.front"));
-            //        //m_PECSBacks.Add(Image.FromFile("Images/"))
-            //    }
-            //    catch
-            //    {
-            //        Console.WriteLine("Failed to load image!");
-            //    }
-            //}
-            //else
-            //{
-            //    try
-            //    {
-            //        Console.WriteLine("Reading Front Images...");
-            //        m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
-            //            SearchOption.AllDirectories).Select(Image.FromFile).ToList();
+        }
 
-            //        Console.WriteLine("Reading Back Images...");
-            //        m_PECSBacks = Directory.GetFiles("Images", "*.0_2",
-            //            SearchOption.AllDirectories).Select(Image.FromFile).ToList();
-            //    }
-            //    catch
-            //    {
-            //        Console.WriteLine("Failed to grab multiple images!");
-            //    }
-            //}
-
+        private static string[] GetFileNames(string path, string filter)
+        {
+            string[] files = Directory.GetFiles(path, filter);
+            for (int i = 0; i < files.Length; i++)
+                files[i] = Path.GetFileName(files[i]);
+            return files;
         }
 
         public void EditFrontImages()
@@ -56,8 +31,12 @@ namespace BatchImageEdit
             try
             {
                 Console.WriteLine("Reading Front Images...");
-                m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
-                    SearchOption.AllDirectories).Select(Image.FromFile).ToList();
+                //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
+                //    SearchOption.AllDirectories).Select(Image.FromFile).ToList();
+                //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
+                //    SearchOption.AllDirectories);
+
+                m_PECSFronts = GetFileNames("Images", "*.0_1");
             }
             catch (Exception)
             {
@@ -66,21 +45,25 @@ namespace BatchImageEdit
 
 
             // Edit fronts
-            for (int i = 0; i < m_PECSFronts.Count; i++)
+            for (int i = 0; i < m_PECSFronts.Length; i++)
             {
-                Console.Clear();
-                Console.WriteLine("#1 - Editing Front PECs: {0}/ {1}", i, m_PECSFronts.Count);
 
                 //Rectangle 
                 Rectangle Address = new Rectangle(242, 30, 638, 270);
+                
+                Image temp = Image.FromFile("Images\\" + m_PECSFronts[i]);
 
-                using (var graphics = Graphics.FromImage(m_PECSFronts[i]))
+                using (var graphics = Graphics.FromImage(temp))
                 {
                     graphics.FillRectangle(Brushes.Purple, Address);
                 }
 
-                m_PECSFronts[i].Save(String.Format("Output/E{0}NE05_F.jpg", (i + 1).ToString().PadLeft(6, '0')), ImageFormat.Jpeg);
-                m_PECSFronts[i] = null;
+                //string FileName = m_PECSFronts[i].Split()
+
+                temp.Save(String.Format("Output/{0}_F.jpg", m_PECSFronts[i].Split(new char[] { '.'})[0], ImageFormat.Jpeg));
+
+                Console.Clear();
+                Console.WriteLine("#1 - Editing Front PECs: {0}/ {1}", i, m_PECSFronts.Length);
             }
         }
 
@@ -89,33 +72,39 @@ namespace BatchImageEdit
             try
             {
                 Console.WriteLine("Reading Back Images...");
-                m_PECSBacks = Directory.GetFiles("Images", "*.0_2",
-                    SearchOption.AllDirectories).Select(Image.FromFile).ToList();
+                //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
+                //    SearchOption.AllDirectories).Select(Image.FromFile).ToList();
+                //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
+                //    SearchOption.AllDirectories);
+
+                m_PECSBacks = GetFileNames("Images", "*.0_2");
             }
             catch (Exception)
             {
-                Console.WriteLine("Error loading back images!");
+                Console.WriteLine("Error loading front images!");
             }
 
 
-            // Edit backs
-            for (int i = 0; i < m_PECSBacks.Count; i++)
+            // Edit fronts
+            for (int i = 0; i < m_PECSFronts.Length; i++)
             {
-                Console.Clear();
-                Console.WriteLine("#2 - Editing Back PECs: {0}/ {1}", i, m_PECSBacks.Count);
-
-                Rectangle Address = new Rectangle(68, 820, 810, 540);
 
                 //Rectangle 
+                Rectangle Address = new Rectangle(242, 30, 638, 270);
 
+                Image temp = Image.FromFile("Images\\" + m_PECSBacks[i]);
 
-                using (var graphics = Graphics.FromImage(m_PECSBacks[i]))
+                using (var graphics = Graphics.FromImage(temp))
                 {
                     graphics.FillRectangle(Brushes.Purple, Address);
                 }
 
-                m_PECSBacks[i].Save(String.Format("Output/E{0}NE05_B.jpg", (i + 1).ToString().PadLeft(6, '0')), ImageFormat.Jpeg);
-                m_PECSBacks[i] = null;
+                //string FileName = m_PECSFronts[i].Split()
+
+                temp.Save(String.Format("Output/{0}_B.jpg", m_PECSBacks[i].Split(new char[] { '.' })[0], ImageFormat.Jpeg));
+
+                Console.Clear();
+                Console.WriteLine("#2 - Finished Back PECs: {0}/ {1}", i, m_PECSBacks.Length);
             }
         }
 
