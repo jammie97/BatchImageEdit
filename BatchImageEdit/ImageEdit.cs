@@ -62,7 +62,7 @@ namespace BatchImageEdit
 
                 temp.Save(_outputPath + String.Format("\\{0}_F.jpg", m_PECSFronts[i].Split(new char[] { '.'})[0], ImageFormat.Jpeg));
 
-                temp = null;
+                temp.Dispose();
 
                 Console.Clear();
                 Console.WriteLine("#1 - Editing Front PECs: {0}/ {1}", i, m_PECSFronts.Length);
@@ -74,10 +74,6 @@ namespace BatchImageEdit
             try
             {
                 Console.WriteLine("Reading Back Images...");
-                //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
-                //    SearchOption.AllDirectories).Select(Image.FromFile).ToList();
-                //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
-                //    SearchOption.AllDirectories);
 
                 m_PECSBacks = GetFileNames(_inputPath, "*.0_2");
             }
@@ -104,7 +100,7 @@ namespace BatchImageEdit
 
                 temp.Save(_outputPath + String.Format("\\{0}_B.jpg", m_PECSBacks[i].Split(new char[] { '.' })[0], ImageFormat.Jpeg));
 
-                temp = null;
+                temp.Dispose();
 
                 Console.Clear();
                 Console.WriteLine("#2 - Finished Back PECs: {0}/ {1}", i, m_PECSBacks.Length);
