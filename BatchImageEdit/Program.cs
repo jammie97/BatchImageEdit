@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace BatchImageEdit
@@ -10,12 +12,30 @@ namespace BatchImageEdit
     {
 
 
-        /// with lists 491 milliseconds!
+        [STAThread]
         static void Main(string[] args)
         {
             Console.WriteLine("Batch Image Edit");
 
             ImageEdit editor = new ImageEdit();
+            string InputPath = " ";
+            // Choose input path
+            using (var fbd = new FolderBrowserDialog())
+            {
+                fbd.SelectedPath = "";
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    InputPath = fbd.SelectedPath;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            Console.WriteLine("INPUT PATH: " + InputPath);
 
             int index = 0;
             while(index != -1)
@@ -36,16 +56,16 @@ namespace BatchImageEdit
                 switch (index)
                 {
                     case 1:
-                        editor.EditFrontImages();
-                        editor.EditBackImages();
+                        editor.EditFrontImages(InputPath);
+                        editor.EditBackImages(InputPath);
                         Console.WriteLine("Done front and back images!\n");
                         break;
                     case 2:
-                        editor.EditFrontImages();
+                        editor.EditFrontImages(InputPath);
                         Console.WriteLine("Done front images!\n");
                         break;
                     case 3:
-                        editor.EditBackImages();
+                        editor.EditBackImages(InputPath);
                         Console.WriteLine("Done back images!\n");
                         break;
                     case 0:

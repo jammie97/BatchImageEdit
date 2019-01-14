@@ -26,7 +26,7 @@ namespace BatchImageEdit
             return files;
         }
 
-        public void EditFrontImages()
+        public void EditFrontImages(string _filePath)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace BatchImageEdit
                 //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
                 //    SearchOption.AllDirectories);
 
-                m_PECSFronts = GetFileNames("Images", "*.0_1");
+                m_PECSFronts = GetFileNames(_filePath, "*.0_1");
             }
             catch (Exception)
             {
@@ -51,7 +51,7 @@ namespace BatchImageEdit
                 //Rectangle 
                 Rectangle Address = new Rectangle(242, 30, 638, 270);
 
-                Image temp = Image.FromFile("Images\\" + m_PECSFronts[i]);
+                Image temp = Image.FromFile(_filePath + "\\" + m_PECSFronts[i]);
 
                 using (var graphics = Graphics.FromImage(temp))
                 {
@@ -67,7 +67,7 @@ namespace BatchImageEdit
             }
         }
 
-        public void EditBackImages()
+        public void EditBackImages(string _filePath)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace BatchImageEdit
                 //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
                 //    SearchOption.AllDirectories);
 
-                m_PECSBacks = GetFileNames("Images", "*.0_2");
+                m_PECSBacks = GetFileNames(_filePath, "*.0_2");
             }
             catch (Exception)
             {
@@ -93,7 +93,7 @@ namespace BatchImageEdit
                 Rectangle Address = new Rectangle(68, 828, 810, 540);
                 
 
-                Image temp = Image.FromFile("Images\\" + m_PECSBacks[i]);
+                Image temp = Image.FromFile(_filePath + "\\" + m_PECSBacks[i]);
 
                 using (var graphics = Graphics.FromImage(temp))
                 {
