@@ -43,13 +43,13 @@ namespace BatchImageEdit
                 Console.WriteLine("Error loading front images!");
             }
 
+            //Rectangle 
+            Rectangle Address = new Rectangle(242, 30, 638, 270);
 
             // Edit fronts
             for (int i = 0; i < m_PECSFronts.Length; i++)
             {
 
-                //Rectangle 
-                Rectangle Address = new Rectangle(242, 30, 638, 270);
 
                 Image temp = Image.FromFile(_inputPath + "\\" + m_PECSFronts[i]);
 
@@ -61,6 +61,8 @@ namespace BatchImageEdit
                 //string FileName = m_PECSFronts[i].Split()
 
                 temp.Save(_outputPath + String.Format("\\{0}_F.jpg", m_PECSFronts[i].Split(new char[] { '.'})[0], ImageFormat.Jpeg));
+
+                temp = null;
 
                 Console.Clear();
                 Console.WriteLine("#1 - Editing Front PECs: {0}/ {1}", i, m_PECSFronts.Length);
@@ -84,14 +86,12 @@ namespace BatchImageEdit
                 Console.WriteLine("Error loading front images!");
             }
 
+            //Rectangle 
+            Rectangle Address = new Rectangle(68, 828, 810, 540);
 
             // Edit fronts
             for (int i = 0; i < m_PECSFronts.Length; i++)
             {
-
-                //Rectangle 
-                Rectangle Address = new Rectangle(68, 828, 810, 540);
-                
 
                 Image temp = Image.FromFile(_inputPath + "\\" + m_PECSBacks[i]);
 
@@ -103,6 +103,8 @@ namespace BatchImageEdit
                 //string FileName = m_PECSFronts[i].Split()
 
                 temp.Save(_outputPath + String.Format("\\{0}_B.jpg", m_PECSBacks[i].Split(new char[] { '.' })[0], ImageFormat.Jpeg));
+
+                temp = null;
 
                 Console.Clear();
                 Console.WriteLine("#2 - Finished Back PECs: {0}/ {1}", i, m_PECSBacks.Length);
