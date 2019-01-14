@@ -19,15 +19,31 @@ namespace BatchImageEdit
 
             ImageEdit editor = new ImageEdit();
             string InputPath = " ";
+            string OutputPath = " ";
             // Choose input path
-            using (var fbd = new FolderBrowserDialog())
+            using (var dlg = new FolderBrowserDialog())
             {
-                fbd.SelectedPath = "";
-                DialogResult result = fbd.ShowDialog();
+                dlg.Description = "Select INPUT folder containing the prescriptions you wish to cover up.";
+                DialogResult result = dlg.ShowDialog();
 
                 if (result == DialogResult.OK)
                 {
-                    InputPath = fbd.SelectedPath;
+                    InputPath = dlg.SelectedPath;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            // Choose output path
+            using (var dlg = new FolderBrowserDialog())
+            {
+                dlg.Description = "Select OUTPUT folder you wish the covered prescriptions to be placed inside.";
+                DialogResult result = dlg.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    OutputPath = dlg.SelectedPath;
                 }
                 else
                 {
@@ -36,6 +52,7 @@ namespace BatchImageEdit
             }
 
             Console.WriteLine("INPUT PATH: " + InputPath);
+            Console.WriteLine("OUPUT PATH: " + OutputPath);
 
             int index = 0;
             while(index != -1)
@@ -56,16 +73,16 @@ namespace BatchImageEdit
                 switch (index)
                 {
                     case 1:
-                        editor.EditFrontImages(InputPath);
-                        editor.EditBackImages(InputPath);
+                        editor.EditFrontImages(InputPath, OutputPath);
+                        editor.EditBackImages(InputPath, OutputPath);
                         Console.WriteLine("Done front and back images!\n");
                         break;
                     case 2:
-                        editor.EditFrontImages(InputPath);
+                        editor.EditFrontImages(InputPath, OutputPath);
                         Console.WriteLine("Done front images!\n");
                         break;
                     case 3:
-                        editor.EditBackImages(InputPath);
+                        editor.EditBackImages(InputPath, OutputPath);
                         Console.WriteLine("Done back images!\n");
                         break;
                     case 0:
