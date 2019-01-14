@@ -55,7 +55,7 @@ namespace BatchImageEdit
 
                 using (var graphics = Graphics.FromImage(temp))
                 {
-                    graphics.FillRectangle(Brushes.Purple, Address);
+                    graphics.FillRectangle(Brushes.DarkGreen, Address);
                 }
 
                 //string FileName = m_PECSFronts[i].Split()
@@ -90,14 +90,14 @@ namespace BatchImageEdit
             {
 
                 //Rectangle 
-                Rectangle Address = new Rectangle(68, 820, 810, 540);
+                Rectangle Address = new Rectangle(68, 828, 810, 540);
                 
 
                 Image temp = Image.FromFile("Images\\" + m_PECSBacks[i]);
 
                 using (var graphics = Graphics.FromImage(temp))
                 {
-                    graphics.FillRectangle(Brushes.Purple, Address);
+                    graphics.FillRectangle(Brushes.DarkGreen, Address);
                 }
 
                 //string FileName = m_PECSFronts[i].Split()
