@@ -54,6 +54,39 @@ namespace BatchImageEdit
             Console.WriteLine("INPUT PATH: " + InputPath);
             Console.WriteLine("OUPUT PATH: " + OutputPath);
 
+            // Have they chosen an extension?
+            int extension = 0;
+            while (extension != -1)
+            {
+                Console.WriteLine("Are the images JPG or 0_1/0_2 extension?");
+                Console.WriteLine("1: The files are of 0_1 and 0_2 extension.");
+                Console.WriteLine("2: The files are of JPG extension.");
+
+                string Decision = Console.ReadLine();
+
+                if (!Int32.TryParse(Decision, out extension))
+                {
+                    extension = 10;
+                }
+
+                switch(extension)
+                {
+                    case 1:
+                        editor.m_Use0102Extension = true;
+                        Console.WriteLine("You have chosen to use the .0_1 and .0_2 extension.");
+                        extension = -1;
+                        break;
+                    case 2:
+                        editor.m_Use0102Extension = false;
+                        Console.WriteLine("You have chosen tu use the .jpg extension.");
+                        extension = -1;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option chosen!");
+                        break;
+                }
+            }
+
             int index = 0;
             while(index != -1)
             {

@@ -13,6 +13,8 @@ namespace BatchImageEdit
     {
         public string[] m_PECSFronts;
         public string[] m_PECSBacks;
+        public bool m_Use0102Extension;
+
         public ImageEdit()
         {
 
@@ -36,7 +38,16 @@ namespace BatchImageEdit
                 //m_PECSFronts = Directory.GetFiles("Images", "*.0_1",
                 //    SearchOption.AllDirectories);
 
-                m_PECSFronts = GetFileNames(_inputPath, "*.0_1");
+                // Uncomment when the already processed forms are reprocessed and recompile.
+                //m_PECSFronts = GetFileNames(_inputPath, "*.0_1");
+                if (m_Use0102Extension)
+                {
+                    m_PECSFronts = GetFileNames(_inputPath, "*.0_1");
+                }
+                else
+                {
+                    m_PECSFronts = GetFileNames(_inputPath, "*.jpg");
+                }
             }
             catch (Exception)
             {
@@ -74,8 +85,17 @@ namespace BatchImageEdit
             try
             {
                 Console.WriteLine("Reading Back Images...");
+                // Uncomment and recompile as release once all processed batches are reprocessed.
 
-                m_PECSBacks = GetFileNames(_inputPath, "*.0_2");
+                //m_PECSBacks = GetFileNames(_inputPath, "*.0_2");
+                if (m_Use0102Extension)
+                {
+                    m_PECSBacks = GetFileNames(_inputPath, "*.0_2");
+                }
+                else
+                {
+                    m_PECSBacks = GetFileNames(_inputPath, "*.jpg");
+                }
             }
             catch (Exception)
             {
@@ -86,7 +106,7 @@ namespace BatchImageEdit
             Rectangle Address = new Rectangle(68, 828, 810, 540);
             Rectangle Controlled = new Rectangle(484, 244, 480, 250);
 
-            // Edit fronts
+            // Edit backs
             for (int i = 0; i < m_PECSBacks.Length; i++)
             {
 
