@@ -46,7 +46,7 @@ namespace BatchImageEdit
                 }
                 else
                 {
-                    m_PECSFronts = GetFileNames(_inputPath, "*.jpg");
+                    m_PECSFronts = GetFileNames(_inputPath, "*F.jpg");
                 }
             }
             catch (Exception)
@@ -94,7 +94,7 @@ namespace BatchImageEdit
                 }
                 else
                 {
-                    m_PECSBacks = GetFileNames(_inputPath, "*.jpg");
+                    m_PECSBacks = GetFileNames(_inputPath, "*B.jpg");
                 }
             }
             catch (Exception)
