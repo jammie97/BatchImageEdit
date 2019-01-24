@@ -55,7 +55,7 @@ namespace BatchImageEdit
             }
 
             //Rectangle 
-            Rectangle Address = new Rectangle(242, 30, 638, 270);
+            Rectangle Address = new Rectangle(242, 30, 638, 303);
 
             // Edit fronts
             for (int i = 0; i < m_PECSFronts.Length; i++)
@@ -70,8 +70,13 @@ namespace BatchImageEdit
                 }
 
                 //string FileName = m_PECSFronts[i].Split()
+                string format = "";
+                if (m_Use0102Extension)
+                    format = "\\{0}_F.jpg";
+                else
+                    format = "\\{0}.jpg";
 
-                temp.Save(_outputPath + String.Format("\\{0}_F.jpg", m_PECSFronts[i].Split(new char[] { '.'})[0], ImageFormat.Jpeg));
+                temp.Save(_outputPath + String.Format(format, m_PECSFronts[i].Split(new char[] { '.'})[0], ImageFormat.Jpeg));
 
                 temp.Dispose();
 
@@ -105,6 +110,7 @@ namespace BatchImageEdit
             //Rectangle 
             Rectangle Address = new Rectangle(68, 828, 810, 540);
             Rectangle Controlled = new Rectangle(484, 244, 480, 250);
+            Rectangle Top = new Rectangle(0, 0, 850, 245);
 
             // Edit backs
             for (int i = 0; i < m_PECSBacks.Length; i++)
@@ -116,11 +122,17 @@ namespace BatchImageEdit
                 {
                     graphics.FillRectangle(Brushes.DarkGreen, Address);
                     graphics.FillRectangle(Brushes.DarkGreen, Controlled);
+                    graphics.FillRectangle(Brushes.DarkGreen, Top);
                 }
 
                 //string FileName = m_PECSFronts[i].Split()
 
-                temp.Save(_outputPath + String.Format("\\{0}_B.jpg", m_PECSBacks[i].Split(new char[] { '.' })[0], ImageFormat.Jpeg));
+                string format = "";
+                if (m_Use0102Extension)
+                    format = "\\{0}_B.jpg";
+                else
+                    format = "\\{0}.jpg";
+                temp.Save(_outputPath + String.Format(format, m_PECSBacks[i].Split(new char[] { '.' })[0], ImageFormat.Jpeg));
 
                 temp.Dispose();
 

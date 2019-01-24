@@ -78,7 +78,7 @@ namespace BatchImageEdit
                         break;
                     case 2:
                         editor.m_Use0102Extension = false;
-                        Console.WriteLine("You have chosen tu use the .jpg extension.");
+                        Console.WriteLine("You have chosen to use the .jpg extension.");
                         extension = -1;
                         break;
                     default:
