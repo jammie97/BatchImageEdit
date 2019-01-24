@@ -55,7 +55,7 @@ namespace BatchImageEdit
             }
 
             //Rectangle 
-            Rectangle Address = new Rectangle(242, 30, 638, 303);
+            Rectangle Address = new Rectangle(242, 0, 638, 333);
 
             // Edit fronts
             for (int i = 0; i < m_PECSFronts.Length; i++)
